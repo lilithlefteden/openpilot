@@ -34,6 +34,7 @@ class QuietMode:
     Check if a sound should be played based on the Quiet Mode setting
     and the current alert.
     """
+    return False
     if not self.enabled:
       return bool(current_alert != AudibleAlert.none)
 
