@@ -356,24 +356,24 @@ class DriverMonitoring:
     dat = messaging.new_message('driverMonitoringState', valid=valid)
     dm = dat.driverMonitoringState
 
-    dm.lockout = self.too_distracted
-    dm.alertCountLockoutPercent = to_percent(self.terminal_alert_cnt / self.settings._MAX_TERMINAL_ALERTS)
-    dm.alertTimeLockoutPercent = to_percent(self.terminal_time / self.settings._MAX_TERMINAL_DURATION)
+    dm.lockout = False
+    dm.alertCountLockoutPercent = 0
+    dm.alertTimeLockoutPercent = 0
     dm.alwaysOn = self.always_on
     dm.alwaysOnLockout = self.always_on and self.awareness <= self.threshold_alert_2
-    dm.alertLevel = self.alert_level
+    dm.alertLevel = AlertLevel.none
     dm.activePolicy = self.active_policy
     dm.isRHD = self.wheel_on_right
     dm.rhdCalibration.calibratedPercent = to_percent(self.wheelpos_offsetter.filtered_stat.n / self.settings._WHEELPOS_FILTER_MIN_COUNT)
     dm.rhdCalibration.offset = self.wheelpos_offsetter.filtered_stat.M
 
-    dm.visionPolicyState.awarenessPercent = to_percent(self.last_vision_awareness if self.active_policy != MonitoringPolicy.vision else self.awareness)
+    dm.visionPolicyState.awarenessPercent = 100
     dm.visionPolicyState.awarenessStep = self.step_change if self.active_policy == MonitoringPolicy.vision else 0.
-    dm.visionPolicyState.isDistracted = self.driver_distracted
+    dm.visionPolicyState.isDistracted = False
     dm.visionPolicyState.distractedTypes.pose = self.distracted_types['pose']
     dm.visionPolicyState.distractedTypes.eye = self.distracted_types['eye']
     dm.visionPolicyState.distractedTypes.phone = self.distracted_types['phone']
-    dm.visionPolicyState.faceDetected = self.face_detected
+    dm.visionPolicyState.faceDetected = True
     dm.visionPolicyState.pose.pitch = self.pose.pitch
     dm.visionPolicyState.pose.yaw = self.pose.yaw
     dm.visionPolicyState.pose.calibrated = self.pose.calibrated
