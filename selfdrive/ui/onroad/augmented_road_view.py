@@ -34,7 +34,7 @@ BORDER_COLORS = {
 }
 
 WIDE_CAM_MAX_SPEED = 10.0  # m/s (22 mph)
-ROAD_CAM_MIN_SPEED = 15.0  # m/s (34 mph)
+ROAD_CAM_MIN_SPEED = 12.0  # m/s (27 mph)
 INF_POINT = np.array([1000.0, 0.0, 0.0])
 
 
